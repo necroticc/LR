@@ -18,7 +18,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader', // Уберите это, если не хотите использовать Babel
+        use: 'babel-loader', 
       },
     ],
   },
