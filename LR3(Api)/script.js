@@ -1,30 +1,42 @@
-const axios = require('axios');
+async function searchVacancies() {
+    const query = document.getElementById('searchQuery').value.trim();
+    const resultsContainer = document.getElementById('vacancyResults');
+    resultsContainer.innerHTML = 'Загружаем вакансии...';
 
-// Функция для получения вакансий с hh.ru
-async function getVacancies(query, page = 0) {
+    if (!query) {
+        resultsContainer.innerHTML = 'Введите запрос для поиска.';
+        return;
+    }
+
     try {
         const response = await axios.get('https://api.hh.ru/vacancies', {
             params: {
                 text: query,
-                page: page, // Номер страницы результатов (по умолчанию 0)
-                per_page: 10 // Количество вакансий на странице
+                per_page: 5,
+                page: 0
             }
         });
 
         const vacancies = response.data.items;
         if (vacancies.length === 0) {
-            console.log('Вакансии не найдены.');
+            resultsContainer.innerHTML = 'Вакансии не найдены.';
         } else {
-            console.log(`Найдено ${response.data.found} вакансий:`);
-            vacancies.forEach((vacancy, index) => {
-                console.log(`${index + 1}. ${vacancy.name}`);
-                console.log(`Компания: ${vacancy.employer.name}`);
-                console.log(`Город: ${vacancy.area.name}`);
-                console.log(`Зарплата: ${vacancy.salary ? `${vacancy.salary.from} - ${vacancy.salary.to} ${vacancy.salary.currency}` : 'Не указана'}`);
-                console.log(`Ссылка: ${vacancy.alternate_url}\n`);
+            resultsContainer.innerHTML = '';
+            vacancies.forEach(vacancy => {
+                const vacancyElement = document.createElement('div');
+                vacancyElement.classList.add('vacancy');
+                vacancyElement.innerHTML = `
+                    <h3>${vacancy.name}</h3>
+                    <p><strong>Компания:</strong> ${vacancy.employer.name}</p>
+                    <p><strong>Город:</strong> ${vacancy.area.name}</p>
+                    <p><strong>Зарплата:</strong> ${vacancy.salary ? `${vacancy.salary.from} - ${vacancy.salary.to} ${vacancy.salary.currency}` : 'Не указана'}</p>
+                    <a href="${vacancy.alternate_url}" target="_blank">Подробнее</a>
+                `;
+                resultsContainer.appendChild(vacancyElement);
             });
         }
     } catch (error) {
-        console.error('Ошибка при получении данных:', error);
+        resultsContainer.innerHTML = 'Ошибка при загрузке данных. Попробуйте позже.';
+        console.error('Ошибка:', error);
     }
 }
