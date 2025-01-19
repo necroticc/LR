@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #0078d4;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+main {
+    padding: 2rem;
+    background: linear-gradient(to bottom, rgba(0, 120, 212, 0.1), rgba(0, 120, 212, 0.3)); /* Градиент фона */
+}
+
+.center {
+    margin: 0 auto;
+    max-width: 90%; /* Увеличиваем ширину слайдера */
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center; /* Центрируем слайдер по горизонтали */
+    align-items: center; /* Центрируем слайдер по вертикали */
+}
+
+.center .slick-track {
+    display: flex;
+    justify-content: center; /* Центрируем изображения внутри слайдера по горизонтали */
+}
+
+.center img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Округляем углы изображений */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Тень для изображений */
+}
+
+.slick-slide {
+    margin: 0 50px; /* Увеличиваем отступы между слайдами */
+    display: flex;
+    justify-content: center; /* Центрируем слайды по горизонтали */
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
