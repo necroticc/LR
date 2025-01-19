@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin'); // Для копиро
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js', // Этот файл теперь будет пустым
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
